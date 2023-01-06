@@ -66,5 +66,19 @@ void keyboard_post_init_user(void) {
   // Call the post init code.
   rgblight_enable_noeeprom(); // enables Rgb, without saving settings
   rgblight_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS); // sets static light
-  rgblight_sethsv_noeeprom(180, 255, 255); // sets the color to teal/cyan without saving
+  rgblight_sethsv_noeeprom(203, 63, 61); // sets the color to teal/cyan without saving
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  if(IS_LAYER_ON_STATE(state, WIN_FN))
+  {
+        rgblight_mode_noeeprom(RGB_MATRIX_HUE_PENDULUM); // sets static light
+        rgblight_sethsv_noeeprom(0, 168, 107); // sets the color to teal/cyan without saving
+  }
+  else
+  {
+        rgblight_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS); // sets static light
+        rgblight_sethsv_noeeprom(203, 63, 61); // sets the color to teal/cyan without saving
+  }
+  return state;
 }
