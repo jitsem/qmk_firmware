@@ -82,3 +82,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   }
   return state;
 }
+
+bool rgb_matrix_indicators_kb(void) {
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color(45, 255, 0, 0);       
+    }
+    return true;
+}
