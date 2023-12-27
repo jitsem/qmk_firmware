@@ -62,6 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
 
+
 void keyboard_post_init_user(void) {
   // Call the post init code.
   rgblight_enable_noeeprom(); // enables Rgb, without saving settings
@@ -83,9 +84,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 }
 
-bool rgb_matrix_indicators_kb(void) {
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(45, 255, 0, 0);       
+        for (uint8_t i = led_min; i < led_max; i++) {
+            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+                rgb_matrix_set_color(i, 255, 0, 0);
+            }
+        }
     }
-    return true;
+    return false;
 }
